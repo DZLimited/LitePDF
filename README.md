@@ -1,97 +1,130 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
+# 📄 LitePDF
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+**LitePDF** is a modern, lightweight **PDF viewer** built with **React Native**.  
+It lets you easily browse, pick, and open PDF files directly from your device storage, with a clean and intuitive user interface using a local **PDF.js** `viewer.html`.
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## ✨ Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- 📂 **File Picker**: Browse files and folders, with shortcuts to Downloads, Documents, Pictures, Music, and DCIM.
+- 🔍 **Search**: Quickly filter files by name.
+- 📑 **PDF Viewer**: Open and read PDF files inside the app using Mozilla’s PDF.js embedded in a local `viewer.html` file.
+- 📊 **File Details**: See file size, type, and last modified date.
+- 🌙 **Modern UI**: Smooth, material-inspired design with shadows, icons, and responsive layouts.
+- ✅ **Offline Support**: Fully functional without internet – works with local device storage.
+- 📤 **Share Files** _(optional)_.
 
-```sh
-# Using npm
+---
+
+## 🛠 Built With
+
+- [React Native](https://reactnative.dev/)
+- [`react-native-fs`](https://github.com/itinance/react-native-fs) – Access device storage
+- [`react-native-webview`](https://github.com/react-native-webview/react-native-webview) – Render the embedded PDF.js `viewer.html`
+- [`@fortawesome/react-native-fontawesome`](https://github.com/FortAwesome/react-native-fontawesome) – Beautiful icons
+- [`@react-navigation`](https://reactnavigation.org/) – Navigation system
+- **[Mozilla PDF.js](https://mozilla.github.io/pdf.js/)** – For rendering PDFs in the local `assets/pdfjs/web/viewer.html`
+
+---
+
+## 🚀 Getting Started
+
+> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/environment-setup) guide before proceeding.
+
+### 📦 1️⃣ Clone & Install
+
+```bash
+# Clone this repo
+git clone https://github.com/yourusername/LitePDF.git
+cd LitePDF
+
+# Install dependencies
+npm install
+```
+
+### ⚙️ 2️⃣ Start Metro
+
+Run the Metro dev server:
+
+```bash
 npm start
-
-# OR using Yarn
+# or
 yarn start
 ```
 
-## Step 2: Build and run your app
+### 📱 3️⃣ Build & Run
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+With Metro running, open a new terminal:
 
-### Android
-
-```sh
-# Using npm
+#### Android
+```bash
 npm run android
-
-# OR using Yarn
+# or
 yarn android
 ```
 
-### iOS
+#### iOS _(optional)_
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+Make sure CocoaPods are installed:
+```bash
+cd ios
+pod install
 ```
 
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+Then run:
+```bash
 npm run ios
-
-# OR using Yarn
+# or
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+> 🗂️ **Note:** The PDF viewer relies on the local `viewer.html` being placed in:
+> ```
+> android/app/src/main/assets/pdfjs/web/viewer.html
+> ```
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+## 🔄 Modify & Test
 
-Now that you have successfully run the app, let's make changes!
+Edit your app’s code in `App.tsx` or your screens. When you save, your app updates instantly using [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+- **Reload Android**: `R` key twice in terminal or `Ctrl+M` → Reload.
+- **Reload iOS**: `Cmd+R` in Simulator.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+---
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## 🐞 Troubleshooting
 
-## Congratulations! :tada:
+If you run into any setup issues, see:
+- [React Native Environment Setup](https://reactnative.dev/docs/environment-setup)
+- [Troubleshooting](https://reactnative.dev/docs/troubleshooting)
 
-You've successfully run and modified your React Native App. :partying_face:
+---
 
-### Now what?
+## 📸 Screenshots
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+_Add your screenshots here!_
 
-# Troubleshooting
+| Splash Screen | Home Screen | File Picker | File Picker (Download Folder) | File Viewer | PDF Viewer |
+|---------------|-------------|-------------|-------------------------------|-------------|------------|
+| ![Splash_Screen](./assets/screenshots/Splash_Screen.png) | ![Home_Screen](./assets/screenshots/Home_Screen.png) | ![CustomPicker_Screen](./assets/screenshots/CustomPicker_Screen.png) |![CustomPicker_Screen(Download)](./assets/screenshots/CustomPicker_Screen(Download).png) |![PDFViewer_Screen](./assets/screenshots/PDFViewer_Screen.png) |
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+---
 
-# Learn More
+## 👏 Credits
 
-To learn more about React Native, take a look at the following resources:
+- Built with React Native & Open Source libraries.
+- PDF rendering powered by [Mozilla PDF.js](https://mozilla.github.io/pdf.js/).
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
+
+## 📃 License
+
+This project is open source — feel free to fork & improve!
+
+---
+
+**Enjoy LitePDF!**
