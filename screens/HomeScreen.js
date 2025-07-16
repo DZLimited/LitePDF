@@ -1,18 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import CustomFilePicker from './CustomFilePicker';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const HomeScreen = () => {
   const [pickedFiles, setPickedFiles] = useState([]);
   const navigation = useNavigation();
 
-  const handleFileSelected = (file) => {
-   
-    setPickedFiles((prevFiles) => [...prevFiles, file]);
+  const handleFileSelected = async (file) => {
+    // setPickedFiles((prevFiles) => [...prevFiles, file]);    
+    // navigation.navigate('Viewer', { file });
 
-    
-    navigation.navigate('Viewer', { file });
+    const newFile = {
+      ...file,
+      lastPage: 1,
+      openedAt: Date.now(),
+    }
+
+    try{
+      const rfile = await AsyncStorage.getItem('recent_files')
+      let recentFiles = rfile ? JSON.parse(rfile) : []
+
+     recentFiles = recentFiles.filter(f => f.path !== newFile.path)
+
+     recentFiles.unshift(newFile);
+
+     if(recentFiles.length > 5){
+      recentFiles = recentFiles.slice(0, 5)
+     }
+
+     await AsyncStorage.setItem('recent_files', JSON.stringify(recentFiles))
+    } catch (err) {
+       console.log('Error saving file:', e);
+    }
+
+    setPickedFiles((prevFiles) => [newFile, ...prevFiles])
+
+    navigation.navigate('Viewer', { file: newFile })
   };
 
   const renderItem = ({ item }) => (
@@ -22,6 +48,22 @@ const HomeScreen = () => {
     </TouchableOpacity>
   );
 
+useEffect(() => {
+  const loadRecentFiles = async () => {
+    try {
+      const existingJSON = await AsyncStorage.getItem('recent_files');
+      if (existingJSON) {
+        const savedFiles = JSON.parse(existingJSON);
+        setPickedFiles(savedFiles);
+      }
+    } catch (e) {
+      console.log('Error loading recent files:', e);
+    }
+  };
+
+  loadRecentFiles();
+}, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>LitePDF - Pick & View</Text>
@@ -30,7 +72,7 @@ const HomeScreen = () => {
       <CustomFilePicker onFileSelected={handleFileSelected} />
 
      
-      <Text style={styles.listTitle}>Picked Files:</Text>
+      <Text style={styles.listTitle}>Recent:</Text>
       <FlatList
         data={pickedFiles}
         keyExtractor={(item, index) => item.path + index}
